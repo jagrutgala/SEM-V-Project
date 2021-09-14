@@ -4,7 +4,7 @@ import nltk
 
 # Create your views here.
 def home(request):
-    print(request)
+    # print(request)
     return render(request, "index.html", {})
 
 def error(request, err):

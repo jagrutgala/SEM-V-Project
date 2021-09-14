@@ -3,6 +3,7 @@
 
 {% block title %}Questions{% endblock %}
 {% block style %}
+    <!-- <link rel="stylesheet" href="{% static 'css/global.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
 {% endblock %}
 
@@ -14,12 +15,9 @@
 {% endblock %}
 
 {% block content %}
-    <section>
-            <!-- <textarea name="edit-area" id="edit-area" hidden="true">{% if text %}{{text}}{% endif %}</textarea> -->
-            <a class="btn" href="/">Go Back</a>
-    </section>
+    <a class="go-back btn" href="/">Go Back</a>
 
-    <section id="span-text">
+    <section class="span-div" id="span-text">
         {% for s in sentences %}
             <span indx="{{forloop.counter0}}">
                 {{s}}
@@ -28,13 +26,13 @@
     </section>
 
     <section>
-        <ul class="" name="" id="">
+        <ul class="question-item-container" name="" id="">
             {% for s in sentences %}
                 <li class="question-item">
                     <span>
                         {{s}}
                     </span>
-                    <button class="highlight-btn" onclick="highlightPrase({{forloop.counter0}})">hightlight</button>
+                    <button class="highlight-btn" onclick="highlightPrase('{{forloop.counter0}}')">hightlight</button>
                 </li>
             {% endfor %}
         </ul>

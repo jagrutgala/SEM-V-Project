@@ -3,24 +3,26 @@
 
 {% block title %}Home Page{% endblock %}
 {% block style %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
 {% endblock %}
 
 {% block script %}
     <script src="{% static 'js/loader.js' %}" defer></script>
+    <script src="{% static 'js/home.js' %}" defer></script>
 {% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block content %}
-    <section class="">
+    <section class="form-container">
         <form class="edit-text-form" name="edit-text-form" id="edit-text-form" method="POST" action="questions/">
             {% csrf_token %}
-            <label for="text">Text Here Down Arrow</label>
+            <label class="edit-text-label" for="text">Text Here <span>↡</span></label>
             <div class="textarea-container" words="0">
-                <textarea class="edit-area" name="edit-area" id="edit-area"></textarea>
-                <button type="reset" class="reset_text btn" id="reset_text-btn" name="reset_text-btn" value="reset">Clear</button>
+                <textarea class="edit-area" name="edit-area" id="edit-area" placeholder="Text here..." words="0"></textarea>
+                <button type="reset" class="reset_text btn" id="reset_text-btn" name="reset_text-btn" value="reset">X</button>
             </div>
                 <button type="submit" class="send_text btn" id="send_text-btn" name="send_text-btn" value="gen_questions">Generate</button>
         </form>

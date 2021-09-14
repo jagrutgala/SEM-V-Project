@@ -1,8 +1,7 @@
 questioniz/
-__pycache__/
-TYCS_project_16 to 30 - Sheet1.pdf
-maylawati2018.pdf
-mhatre2017.pdf
+**/__pycache__/**
+*.pdf
 t_index.html
 2109805_JagrutGala(Synopsis).pdf
 Project Related.docx
+Questioniz_web/qGen/__pycache__/views.cpython-39.pyc
