@@ -1,0 +1,19 @@
+.question-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid currentColor;
+}
+
+.question-item .highlight-btn, .question-item .highlight-btn {
+    transform: scale(0);
+    transition: transform 200ms;
+}
+
+.question-item:hover .highlight-btn, .question-item:focus .highlight-btn {
+    transform: scale(1);
+}
+
+.selected {
+    background-color: yellow;
+}

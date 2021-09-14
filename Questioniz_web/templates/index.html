@@ -1,8 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home Page{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/loader.js' %}" defer></script>
+{% endblock %}
+
+{% block header %}{% endblock %}
 
 {% block content %}
-    <h1>Hello World</h1>
-    <p>This is the Home Page</p>
+    <section class="">
+        <form class="edit-text-form" name="edit-text-form" id="edit-text-form" method="POST" action="questions/">
+            {% csrf_token %}
+            <label for="text">Text Here Down Arrow</label>
+            <div class="textarea-container" words="0">
+                <textarea class="edit-area" name="edit-area" id="edit-area"></textarea>
+                <button type="reset" class="reset_text btn" id="reset_text-btn" name="reset_text-btn" value="reset">Clear</button>
+            </div>
+                <button type="submit" class="send_text btn" id="send_text-btn" name="send_text-btn" value="gen_questions">Generate</button>
+        </form>
+    </section>
+
+    <div class="no-display overlay" id="loading">
+        <div class="loader"></div>
+    </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

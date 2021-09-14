@@ -1,0 +1,71 @@
+:root {
+    --background-color: #464C59;
+    --background-color-light: #516270;
+    --background-color-dark: #35404A;
+    --text-color: white;
+    --text-color-acent: #40c900;
+    --text-color-light: #82ff48;
+    --text-color-dark: #2e9200;
+}
+
+/* Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+.btn {
+    
+}
+
+/* Text Area and Its Container */
+.textarea-container {
+    width: 80%;
+    padding: 1rem;
+    position: relative;
+}
+
+.edit-area { /*Textarea*/
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 9rem;
+    max-height: 10rem;
+    margin: 1rem 0;
+}
+
+.textarea-container::before { /*Words: no of words*/
+    content: 'words: ' attr(words);
+    position: absolute;
+    background: #EEEEEE;
+    color: black;
+    width: fit-content;
+    top: 0;
+    left: 0;
+    margin: 0.3rem;
+    padding: 0.2rem;
+}
+
+.reset_text { /*Clear and Reset Btn*/
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0.3rem 1rem;
+    padding: 0.2rem;
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.send_text {
+    margin: 0.3rem;
+    padding: 0.2rem;
+    font-size: 1.5rem;
+}
+
+

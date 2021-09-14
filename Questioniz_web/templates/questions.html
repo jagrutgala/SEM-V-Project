@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Questions{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+{% endblock %}
+
+{% block script %}
+    <script>
+        var textarea_text= "{{text}}";
+    </script>
+    <script src="{% static 'js/questions.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <section>
+            <!-- <textarea name="edit-area" id="edit-area" hidden="true">{% if text %}{{text}}{% endif %}</textarea> -->
+            <a class="btn" href="/">Go Back</a>
+    </section>
+
+    <section id="span-text">
+        {% for s in sentences %}
+            <span indx="{{forloop.counter0}}">
+                {{s}}
+            </span>
+        {% endfor %}
+    </section>
+
+    <section>
+        <ul class="" name="" id="">
+            {% for s in sentences %}
+                <li class="question-item">
+                    <span>
+                        {{s}}
+                    </span>
+                    <button class="highlight-btn" onclick="highlightPrase({{forloop.counter0}})">hightlight</button>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

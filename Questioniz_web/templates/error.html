@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home Page{% endblock %}
+{% block style %}
+    <!-- <link rel="stylesheet" href="{% static 'css/error.css' %}"> -->
+{% endblock %}
+
+{% block script %}
+    <!-- <script src="{% static 'js/error.js' %}" defer></script> -->
+{% endblock %}
+
+{% block header %}Error{% endblock %}
+{% block content %}{{error_msg}}{% endblock %}
+{% block footer %}Sorry!{% endblock %}
