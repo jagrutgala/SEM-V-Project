@@ -1,5 +1,5 @@
 :root {
-    --background-color: #464C59;
+    --background-color: #2d313a;
     --background-color-accent: #35404A;
     --text-color: white;
     --text-color-acent: #40c900;
@@ -14,9 +14,42 @@
 body {
     background: var(--background-color);
     color: var(--text-color);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 5vw 10vw;
+
 }
 
+/* Btn */
 .btn {
-    margin: 0.3rem;
-    padding: 0.2rem;
+    color: currentColor;
+    background: none;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+}
+
+.btn+ * {
+    margin: 1rem;
+}
+
+/* Round Border */
+.round-border {
+    box-shadow: 0 0 0 3px currentColor;
+    border-radius: 2px;
+}
+
+.round-border-thin {
+    box-shadow: 0 0 0 2px currentColor;
+    border-radius: 1px;
+}
+
+.round-border-thick {
+    box-shadow: 0 0 0 5px currentColor;
+    border-radius: 3px;
+}
+
+/* No-Display */
+.no-display {
+    display: none;
 }

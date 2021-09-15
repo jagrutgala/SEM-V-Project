@@ -3,7 +3,7 @@
 
 {% block title %}Questions{% endblock %}
 {% block style %}
-    <!-- <link rel="stylesheet" href="{% static 'css/global.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
 {% endblock %}
 
@@ -15,9 +15,9 @@
 {% endblock %}
 
 {% block content %}
-    <a class="go-back btn" href="/">Go Back</a>
+    <a class="go-back btn round-border-thin" href="/">🠔 Go Back</a>
 
-    <section class="span-div" id="span-text">
+    <section class="display-text round-border" id="span-text">
         {% for s in sentences %}
             <span indx="{{forloop.counter0}}">
                 {{s}}
@@ -25,14 +25,15 @@
         {% endfor %}
     </section>
 
-    <section>
-        <ul class="question-item-container" name="" id="">
+    <section class="questions-container">
+        <button class="clear_selection btn round-border-thin no-display" id="clear_selection-btn" name="clear_selection-btn" onclick="clearSelection()">X</button>
+        <ul class="questions-ul" name="" id="">
             {% for s in sentences %}
                 <li class="question-item">
-                    <span>
+                    <span class="question">
                         {{s}}
                     </span>
-                    <button class="highlight-btn" onclick="highlightPrase('{{forloop.counter0}}')">hightlight</button>
+                    <button class="highlight btn round-border-thin" onclick="highlightPrase('{{forloop.counter0}}')">hightlight</button>
                 </li>
             {% endfor %}
         </ul>

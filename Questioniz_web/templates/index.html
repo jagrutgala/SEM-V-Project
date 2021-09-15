@@ -19,12 +19,12 @@
     <section class="form-container">
         <form class="edit-text-form" name="edit-text-form" id="edit-text-form" method="POST" action="questions/">
             {% csrf_token %}
-            <label class="edit-text-label" for="text">Text Here <span>↡</span></label>
+            <label class="edit-text-label" for="text">Text Here <span>🠗</span></label>
             <div class="textarea-container" words="0">
                 <textarea class="edit-area" name="edit-area" id="edit-area" placeholder="Text here..." words="0"></textarea>
                 <button type="reset" class="reset_text btn" id="reset_text-btn" name="reset_text-btn" value="reset">X</button>
             </div>
-                <button type="submit" class="send_text btn" id="send_text-btn" name="send_text-btn" value="gen_questions">Generate</button>
+                <button type="submit" class="send_text btn round-border-thick" id="send_text-btn" name="send_text-btn" value="gen_questions">Generate</button>
         </form>
     </section>
 
