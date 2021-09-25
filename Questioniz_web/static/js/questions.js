@@ -6,7 +6,7 @@ function highlightPrase(index) {
     for(let i=0; i<sentences.length; i++) {
         sentences[i].classList.remove("selected");
         if(index == i) {
-            sentences[i].scrollIntoView({ block: "start",  behavior: "smooth", inline: "center" });
+            sentences[i].scrollIntoView({ block: "start",  behavior: "smooth" });
             sentences[i].classList.add("selected");
         }
 
@@ -36,6 +36,6 @@ function toggleAnswer(indx) {
         ans_p.classList.remove("no-display");
     } else {
         ans_p.classList.add("no-display");
-
     }
 }
+

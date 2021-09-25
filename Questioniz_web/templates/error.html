@@ -11,6 +11,16 @@
     <!-- <script src="{% static 'js/error.js' %}" defer></script> -->
 {% endblock %}
 
-{% block header %}Error{% endblock %}
-{% block content %}{{error_msg}}{% endblock %}
-{% block footer %}Sorry!{% endblock %}
+{% block header %}
+    <p class="error big">Error</p>
+{% endblock %}
+{% block content %}
+    <div class="link-back">
+        <a class="go-back btn round-border-thin" href="/">🠔 Go Back</a>
+    </div>
+    <div>
+        "{{error_msg}}"
+    </div>
+    
+{% endblock %}
+{% block footer %}{% endblock %}

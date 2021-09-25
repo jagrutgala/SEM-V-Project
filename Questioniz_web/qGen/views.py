@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import nltk
-from .QG import QuestionsGenerator
 from .doc import Doc
 
 # Create your views here.

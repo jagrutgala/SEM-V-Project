@@ -1,6 +1,5 @@
 import nltk, math, string, random
 from nltk.corpus import stopwords as StopWords
-from nltk.util import skipgrams as skipGram
 
 class Doc:
     def __init__(self, text):
@@ -53,7 +52,7 @@ class Doc:
             sentences[i]= " ".join(s)
             sentences[i]+= "."
         return sentences
-        
+
     # TF-IDF
     def tf(self, words, len_words)->dict:
         tf_score= {}

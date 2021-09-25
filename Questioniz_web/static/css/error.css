@@ -1,0 +1,15 @@
+.link-back {
+    margin: 1rem 0;
+}
+
+.link-back * {
+    margin: 0;
+}
+
+.error {
+    color: #FF5555;
+}
+
+.big {
+    font-size: 3rem;
+}

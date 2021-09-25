@@ -30,7 +30,7 @@
             {% for i, s in questions_a %}
                 <li class="question-item">
                     <div>
-                        <span class="question" onclick="toggleAnswer('{{forloop.counter0}}')">{{s}}</span>
+                        <span class="question" onclick="toggleAnswer('{{forloop.counter0}}')">{{s}}?</span>
                         <p class="answer no-display">Answer: {{i.1}}</p>
                     </div>
                     <button class="highlight btn round-border-thin" onclick="highlightPrase('{{i.0}}')">hightlight</button>
