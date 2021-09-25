@@ -27,18 +27,29 @@ class Doc:
 
     def stopWordSentences(self, data)->list:
         """sentences:list= list of sentences, sentence:list= list of words i.e. it is an element of sentences"""
+        print(f"\n{data}")
         symbols= ['\n', '~', ':', "'", "''", '+', '[', '\\', '@', '^', '{', '%', '(', '-', '"', '*', '|', '&', '<', '`', '``', '}', '_', '=', ']', '!', '>', ';', '?', '#', '$', ')', '/']
-        data= "".join(x.lower() for x in data if x not in symbols or not x.isdigit())
+        data= "".join([x.lower() for x in data if x not in symbols])
+        # for x in data:
+        #     if(x not in symbols):
+        #         print(x, end="")
+        print(f"\n{data}")
         sentences= self.tokenize_to_sentences(data)
         for i, s in enumerate(sentences):
             word_s= self.tokenize_to_words(s)
             word_s= [w.lower() for w in word_s if w not in self.better_stop_words]
             sentences[i]= word_s
+        
+        for i, s in enumerate(sentences):
+            tag_word_s= nltk.pos_tag(s)
+            sentences[i]= [tw[0] for tw in tag_word_s if tw[1] in ["NN", "NNS", "NNP", "NNPS"]]
+        # for i, ts in enumerate(sentences):
+        #     print(ts)
         return sentences
 
     def cleanSentences(self, data):
         symbols= ['\n', '~', ':', "'", "''", '+', '[', '\\', '@', '^', '{', '%', '(', '-', '"', '*', '|', '&', '<', '`', '``', '}', '_', '=', ']', '!', '>', ';', '?', '#', '$', ')', '/']
-        data= "".join(x for x in data if x not in symbols or not x.isdigit())
+        data= "".join([x for x in data if x not in symbols or not x.isdigit()])
         sentences= self.tokenize_to_sentences(data)
         for i, s in enumerate(sentences):
             word_s= self.tokenize_to_words(s)
@@ -117,7 +128,9 @@ class Doc:
         tf_idf_score= self.tf_idf()
         question_candidates= self.get_candidates(tf_idf_score)
         questions_marked= {}
-        for i in range(len(self.cleaned_sentences)):
+        random_sent_order= [n for n in range(len(self.cleaned_sentences))]
+        random.shuffle(random_sent_order)
+        for i in random_sent_order:
             selected= False
             ith_questions= []
             for k in question_candidates:

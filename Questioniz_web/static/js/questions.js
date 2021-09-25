@@ -6,11 +6,10 @@ function highlightPrase(index) {
     for(let i=0; i<sentences.length; i++) {
         sentences[i].classList.remove("selected");
         if(index == i) {
-            sentences[i].scrollIntoView({ block: "start",  behavior: "smooth" });
             sentences[i].classList.add("selected");
         }
-
     }
+    document.querySelector("#span-text").scrollIntoView({ block: "center", behavior: "smooth"});
     clear_btn.classList.remove("no-display");
     
     console.log(clear_btn.classList);
