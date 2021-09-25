@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import nltk
+from .QG import QuestionsGenerator
+from .doc import Doc
 
 # Create your views here.
 def home(request):
@@ -15,16 +17,16 @@ def error(request, err):
 def questions(request):
     text:str= None
     sentences= None
-    tagged_sentences:list= None
+    questions_with_ans= None
     if(request.method== "POST"):
         if(request.POST.get("send_text-btn")== "gen_questions"):
             text= request.POST.get("edit-area", None)
             # change to redirect
             if(not text): return redirect("/error/Empty Textarea")
-            sentences= nltk.sent_tokenize(text)
-            tagged_sentences= []
-            for i in sentences:
-                words= nltk.word_tokenize(i)
-                i= words
-                tagged_sentences.append(nltk.pos_tag(words))
-    return render(request, "questions.html", {"text": text, "sentences": sentences, "tagged": tagged_sentences})
+            # All Validations Complete now processing Data
+            document= Doc(text)
+            sentences= document.getCleanedSentences()
+            questions:dict= document.getQuestionCandidates()
+            questions_with_ans= questions.items()
+            # print(questions_with_ans)
+    return render(request, "questions.html", {"text": text, "sentences": sentences, "questions_a": questions_with_ans})

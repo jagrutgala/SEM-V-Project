@@ -6,12 +6,13 @@ function highlightPrase(index) {
     for(let i=0; i<sentences.length; i++) {
         sentences[i].classList.remove("selected");
         if(index == i) {
-            sentences[i].scrollIntoView();
+            sentences[i].scrollIntoView({ block: "start",  behavior: "smooth", inline: "center" });
             sentences[i].classList.add("selected");
         }
 
     }
     clear_btn.classList.remove("no-display");
+    
     console.log(clear_btn.classList);
 }
 
@@ -24,4 +25,17 @@ function clearSelection() {
         sentences[i].classList.remove("selected");
     }
     clear_btn.classList.add("no-display");
+}
+
+function toggleAnswer(indx) {
+    console.log(indx);
+    let clicked_li= document.querySelector("#questions-ul").children[indx];
+    let ans_p= clicked_li.querySelector(".answer");
+    console.log(clicked_li);
+    if(ans_p.classList.contains("no-display")) {
+        ans_p.classList.remove("no-display");
+    } else {
+        ans_p.classList.add("no-display");
+
+    }
 }

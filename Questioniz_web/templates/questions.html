@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Questions{% endblock %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
@@ -27,13 +26,14 @@
 
     <section class="questions-container">
         <button class="clear_selection btn round-border-thin no-display" id="clear_selection-btn" name="clear_selection-btn" onclick="clearSelection()">X</button>
-        <ul class="questions-ul" name="" id="">
-            {% for s in sentences %}
+        <ul class="questions-ul" name="" id="questions-ul">
+            {% for i, s in questions_a %}
                 <li class="question-item">
-                    <span class="question">
-                        {{s}}
-                    </span>
-                    <button class="highlight btn round-border-thin" onclick="highlightPrase('{{forloop.counter0}}')">hightlight</button>
+                    <div>
+                        <span class="question" onclick="toggleAnswer('{{forloop.counter0}}')">{{s}}</span>
+                        <p class="answer no-display">Answer: {{i.1}}</p>
+                    </div>
+                    <button class="highlight btn round-border-thin" onclick="highlightPrase('{{i.0}}')">hightlight</button>
                 </li>
             {% endfor %}
         </ul>
