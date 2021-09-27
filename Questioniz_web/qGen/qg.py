@@ -1,14 +1,11 @@
 import nltk, math, string, random
 from nltk.corpus import stopwords as StopWords
 
-class Doc:
-    def __init__(self, text):
-        self.raw_text= text
+class Cleaner:
+    symbols= ['\n', '~', ':', "'", "''", '+', '[', '\\', '@', '^', '{', '%', '(', '-', '"', '*', '|', '&', '<', '`', '``', '}', '_', '=', ']', '!', '>', ';', '?', '#', '$', ')', '/']
+    def __init__(self):
         self.better_stop_words= self.getStopWords()
-        self.stop_sentences= self.stopWordSentences(text) # used for tf-idf
-        self.cleaned_sentences= self.cleanSentences(text)
-        print(f"cleaned_sentences: {type(self.cleaned_sentences)}, {type(self.cleaned_sentences[0])}")
-
+    
     def getStopWords(self, lang= None, symbols=True)->list:
         if(lang== None): lang= "english"
         sw= StopWords.words(lang)
@@ -25,15 +22,10 @@ class Doc:
         """tokenizes given data in words"""
         return nltk.word_tokenize(data)
 
-    def stopWordSentences(self, data)->list:
+    def stopClean(self, data):
         """sentences:list= list of sentences, sentence:list= list of words i.e. it is an element of sentences"""
-        print(f"\n{data}")
-        symbols= ['\n', '~', ':', "'", "''", '+', '[', '\\', '@', '^', '{', '%', '(', '-', '"', '*', '|', '&', '<', '`', '``', '}', '_', '=', ']', '!', '>', ';', '?', '#', '$', ')', '/']
-        data= "".join([x.lower() for x in data if x not in symbols])
-        # for x in data:
-        #     if(x not in symbols):
-        #         print(x, end="")
-        print(f"\n{data}")
+        data= "".join([x.lower() for x in data if x not in Cleaner.symbols])
+        data= "".join([x for x in data if not x.isdigit()])
         sentences= self.tokenize_to_sentences(data)
         for i, s in enumerate(sentences):
             word_s= self.tokenize_to_words(s)
@@ -43,13 +35,10 @@ class Doc:
         for i, s in enumerate(sentences):
             tag_word_s= nltk.pos_tag(s)
             sentences[i]= [tw[0] for tw in tag_word_s if tw[1] in ["NN", "NNS", "NNP", "NNPS"]]
-        # for i, ts in enumerate(sentences):
-        #     print(ts)
         return sentences
-
-    def cleanSentences(self, data):
-        symbols= ['\n', '~', ':', "'", "''", '+', '[', '\\', '@', '^', '{', '%', '(', '-', '"', '*', '|', '&', '<', '`', '``', '}', '_', '=', ']', '!', '>', ';', '?', '#', '$', ')', '/']
-        data= "".join([x for x in data if x not in symbols or not x.isdigit()])
+    
+    def clean(self, data):
+        data= "".join([x for x in data if x not in Cleaner.symbols])
         sentences= self.tokenize_to_sentences(data)
         for i, s in enumerate(sentences):
             word_s= self.tokenize_to_words(s)
@@ -57,14 +46,38 @@ class Doc:
             sentences[i]= word_s
         return sentences
 
-    def getCleanedSentences(self):
-        sentences= self.cleaned_sentences.copy()
-        for i, s in enumerate(sentences):
-            sentences[i]= " ".join(s)
-            sentences[i]+= "."
-        return sentences
+    def printClean(self, data):
+        cleaned_data= self.clean(data)
+        for i, s in enumerate(cleaned_data):
+            cleaned_data[i]= " ".join(s)
+            cleaned_data[i]+= "."
+        return cleaned_data
 
-    # TF-IDF
+class Document:
+    def __init__(self, text):
+        self.raw_text= text
+        self.doc_cleaner= Cleaner()
+        self.cleanDocument()
+
+    def cleanDocument(self):
+        self.stop_sentences= self.doc_cleaner.stopClean(self.raw_text)
+        self.cleaned_sentences = self.doc_cleaner.clean(self.raw_text)
+        self.print_sentences = self.doc_cleaner.printClean(self.raw_text)
+
+    def getstopSentences(self):
+        return self.stop_sentences
+
+    def getCleanedSentences(self):
+        return self.cleaned_sentences
+
+    def getPrintSentences(self):
+        return self.print_sentences
+
+class QuestionGenerator:
+    def __init__(self, doc):
+        self.document= doc
+
+# TF-IDF
     def tf(self, words, len_words)->dict:
         tf_score= {}
         for each_word in words:
@@ -89,34 +102,27 @@ class Doc:
         idf_score.update((x, math.log(len_sentences)/y) for x, y in idf_score.items())
         return idf_score
 
-    def tf_idf(self)->dict:
+    def tf_idf(self, stop_sentences)->dict:
         # Gather list of all sentences and all words
-        sentences= self.stop_sentences # list of all sentences
-        no_of_sentences= len(sentences)
+        no_of_sentences= len(stop_sentences)
         words= [] # list of all words
-        for s in sentences:
+        for s in stop_sentences:
             words.extend(s)
         no_of_words= len(words)
         # Calculate TF
         tf_score= self.tf(words, no_of_words) # Term Frequency
-        # print(f"TF: {tf_score}")
         # Calculate IDF
-        idf_score= self.idf(words, sentences, no_of_sentences) # Inverse Document Frequency
-        # print(f"IDF: {idf_score}")
+        idf_score= self.idf(words, stop_sentences, no_of_sentences) # Inverse Document Frequency
         # Calculate TF-IDF
         tf_idf_score = {key: tf_score[key] * idf_score.get(key, 0) for key in tf_score.keys()}
         # Sort tf_idf_scores
         tf_idf_score= dict(sorted(tf_idf_score.items(), key=lambda elem: elem[1], reverse = True)) 
-        # print(f"TF-IDF: {tf_idf_score}")
         return tf_idf_score
 
-    def get_candidates(self, extracted_words)->dict:
-        # print(f"Extracted_Words: {extracted_words.keys()}")
+    def get_candidates(self, sentences, extracted_words)->dict:
         q_can= {}
-        for s_id, s in enumerate(self.cleaned_sentences):
-            # print(f"Sentence: {type(s)}")
+        for s_id, s in enumerate(sentences):
             ans_words= [w for w in s if w.lower() in extracted_words] # list of words from the sentence that can be answer
-            # print(f"{s_id}: {ans_words}"j)
             for aw in ans_words:
                 for indx in [i for i,v in enumerate(s) if v==aw]: # find and replace ans_word with '_____'
                     sent_copy= [w.lower() for w in s]
@@ -124,11 +130,13 @@ class Doc:
                     q_can[(s_id, aw)]= " ". join(sent_copy)
         return q_can
 
-    def getQuestionCandidates(self):
-        tf_idf_score= self.tf_idf()
-        question_candidates= self.get_candidates(tf_idf_score)
+    def MakeQuestions(self):
+        stop_sentences= self.document.getstopSentences()
+        cleaned_sentences= self.document.getCleanedSentences()
+        tf_idf_score= self.tf_idf(stop_sentences)
+        question_candidates= self.get_candidates(cleaned_sentences, tf_idf_score)
         questions_marked= {}
-        random_sent_order= [n for n in range(len(self.cleaned_sentences))]
+        random_sent_order= [n for n in range(len(cleaned_sentences))]
         random.shuffle(random_sent_order)
         for i in random_sent_order:
             selected= False
@@ -142,4 +150,3 @@ class Doc:
 
         # question_candidates= {tuple(sentence_id, answer): dash_question}
         return questions_marked
-

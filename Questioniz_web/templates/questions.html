@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
 {% endblock %}
 
@@ -14,9 +13,15 @@
 {% endblock %}
 
 {% block content %}
-    <a class="go-back btn round-border-thin" href="/">🠔 Go Back</a>
+    <section class="text-area--section">
+        <form class="text-area--form" name="text-area-form" id="text-area-form" method="POST" action="/questions/">
+            {% csrf_token %}
+            <textarea class="text-area--text no-display" name="text-area" id="text-area" name="text-area" id="text-area">{{text}}</textarea>
+            <button class="go-back btn round-border-thin" type="submit" name="goback-btn" value="go-back">🠔 Go Back</button>
+        </form>
+    </section>
 
-    <section class="display-text round-border" id="span-text">
+    <section class="display-text round-border" id="span-sentences">
         {% for s in sentences %}
             <span indx="{{forloop.counter0}}">
                 {{s}}
@@ -24,16 +29,24 @@
         {% endfor %}
     </section>
 
-    <section class="questions-container">
-        <button class="clear_selection btn round-border-thin no-display" id="clear_selection-btn" name="clear_selection-btn" onclick="clearSelection()">X</button>
-        <ul class="questions-ul" name="" id="questions-ul">
-            {% for i, s in questions_a %}
-                <li class="question-item">
-                    <div>
+    <section class="questions--section">
+        <button class="clear-selection-btn btn round-border-thin no-display" id="clear-selection-btn" name="clear-selection-btn" onclick="clearSelection()">X</button>
+        <ul class="questions--ul" name="questions--ul" id="questions--ul">
+            {% for i, s in questions_with_ans %}
+                <li class="question--item">
+                    <div class="question-contanier">
                         <span class="question" onclick="toggleAnswer('{{forloop.counter0}}')">{{s}}?</span>
                         <p class="answer no-display">Answer: {{i.1}}</p>
                     </div>
-                    <button class="highlight btn round-border-thin" onclick="highlightPrase('{{i.0}}')">hightlight</button>
+                    <div>
+                        <button class="highlight btn round-border-thin" hover="Highlight" onclick="highlightPrase('{{i.0}}')">
+                            <svg class="svg-highlight svg" viewBox="0 0 16 16"><use xlink:href="#svg-highlight" href="#svg-highlight"></use></svg>
+                        </button>
+                        <button class="copy btn round-border-thin" hover="Copy" onclick="copyPhrase('{{forloop.counter0}}')">
+                            <svg class="svg-copy svg" viewBox="0 0 16 16"><use xlink:href="#svg-copy" href="#svg-copy"></use></svg>
+                        </button>
+                    </div>
+
                 </li>
             {% endfor %}
         </ul>

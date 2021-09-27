@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+{% endblock %}
+
+{% block script %}
+    <script>
+        var textarea_text= "{{text}}";
+    </script>
+    <script src="{% static 'js/questions.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <section class="text-area--section" id="span-text">
+        <form class="text-area--form" name="text-area-form" id="text-area-form" method="POST" action="/questions/">
+            {% csrf_token %}
+            <label class="text-area--label" for="text">Text Here <span>🠗</span></label>
+            <div class="text-area--container" words="0">
+                {% if text %}
+                    <textarea class="text-area--text" name="text-area" id="text-area" placeholder="Text here..." words="0">{{text}}</textarea>
+                {% else %}
+                    <textarea class="text-area--text" name="text-area" id="text-area" placeholder="Text here..." words="0"></textarea>
+                {% endif %}
+                <button type="reset" class="reset-btn btn " id="text-area-btn-reset" name="text-area-btn-reset" value="reset">X</button>
+            </div>
+                <button type="submit" class="submit-btn btn round-border-thick" id="text-area-btn-submit" name="text-area-btn-submit" value="generate-questions">Generate</button>
+        </form>
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <div class="no-display overlay" id="loading">
+        <div class="loader"></div>
+    </div>
+{% endblock %}

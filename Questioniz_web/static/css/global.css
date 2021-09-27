@@ -1,8 +1,32 @@
 :root {
-    --background-color: #2d313a;
-    --background-color-accent: #35404A;
-    --text-color: white;
-    --text-color-acent: #40c900;
+    --background-color: #1C3144;
+    --background-color-accent: #596F62;
+    --text-color: #C3D898;
+    --text-color-acent: #7EA16B;
+    --text-color-acent2: #DA4450;
+}
+
+.app {
+    color: var(--text-color-acent);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: 150ms;
+}
+
+.app:hover .svg-logo {
+    transform: scale(1.2);
+}
+
+.link, .link:visited {
+    color: var(--text-color-acent);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: 150ms;
+}
+
+.link:hover {
+    text-decoration: underline;
+    transform: translateY(-5px);
 }
 
 /* Body */
@@ -15,13 +39,12 @@ body {
     background: var(--background-color);
     color: var(--text-color);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding: 5vw 3vw;
+    padding: 1vw 3vw 5vw 3vw;
     scroll-behavior: smooth;
 }
 
 /* Btn */
 .btn {
-    color: currentColor;
     background: none;
     margin: 1rem;
     padding: 0.5rem 1rem;
@@ -52,4 +75,51 @@ body {
 /* No-Display */
 .no-display {
     display: none;
+}
+
+/* SVG */
+.svg-symbol {
+    width: 100%;
+}
+
+.svg {
+    width: 1rem;
+    aspect-ratio: 1/1;
+}
+
+.svg-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    width: 3rem;
+    fill: white;
+    margin: 0rem 1rem;
+    transition: 200ms;
+}
+
+/* Navigation */
+.navigation, .navigation> * {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation-list {
+    display: flex;
+    list-style: none;
+    align-items: center;
+
+}
+
+.navigation-list * {
+    display: inline-block;
+    margin: 0;
+    padding: 0.2rem 0.3rem;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    outline: none;
 }

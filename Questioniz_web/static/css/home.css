@@ -1,106 +1,58 @@
-/* Form & Inputs */
-.edit-text-form {
+/* Home */
+
+
+
+
+/* Sign Up & Login */
+
+.form-container {
+    display: block;
+    width: 30%;
+    margin: 3rem auto;
+    padding: 3rem;
+}
+
+.form {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
-.edit-text-label {
-    font-size: 2rem;
-}
-
-/* Textarea Container */
-.textarea-container {
-    width: 100%;
-    height: auto;
-    position: relative;
-    margin-top: 1rem;
-    padding: 1rem;
-    outline: auto;
-}
-
-.textarea-container::after { /*Words: no of words*/
-    content: 'words: ' attr(words);
-    position: absolute;
-    background: #EEEEEE;
-    color: black;
-    width: fit-content;
-    bottom: 0;
-    left: 0;
-    padding: 0.1rem 0.2rem;
-}
-
-/* Textarea */
-.edit-area {
-    resize: none;
-    box-sizing: border-box;
+.form-input {
     color: var(--text-color);
-    background: var(--background-color);
-    width: 100%;
-    height: 10rem;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-}
-
-.edit-area:placeholder-shown+ .reset_text {
-    opacity: 0;
-}
-
-
-
-/* Reset|Clear Btn */
-.reset_text {
     background: none;
-    color: inherit;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    margin: 0 0.5rem;
-    padding: 0.1rem 0.2rem;
     border: none;
-    outline: auto;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 0.1rem 0.5rem;
+    position: relative;
+    border-bottom: 2px solid currentColor;
+    outline: none;
+    /* padding: 1rem; */
+}
+
+.form-input:hover::placeholder, .form-input:focus::placeholder {
     opacity: 1;
-    transition: opacity ease-out 150ms;
 }
 
-.reset_text::before {
-    content: 'Clear Text';
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    width: max-content;
-    background: var(--background-color);
-    padding: 0.1rem 0.2rem;
-    border: 1px solid currentColor;
-    opacity: 0.7;
-    transform: translateX(-50%) scale(0);
-
+.form-input::placeholder {
+    color: var(--text-color);
+    opacity: 0.3;
+    transition: 150ms;
 }
 
-.reset_text:hover::before {
-    transform: translateX(-50%) scale(1);
+.signup-btn, .login-btn, .reset-btn{
+    color: var(--text-color);
+    transition: transform 250ms;
+}
+
+.signup-btn:hover, .signup-btn:focus,
+.login-btn:hover, .login-btn:focus,
+.reset-btn:hover, .reset-btn:focus {
+    transform: scale(1.2);
 }
 
 
 
-/* Generate Btn */
-.send_text {
-    color: var(--text-color-acent);
-    background: var(--bacground-color-acent);
-    font-family: inherit;
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-top: 3rem;
-    transition: transform ease-out 150ms;
-}
-
-.send_text:hover, .send_text:focus {
-    transform: scale(1.1) translateY(-1%);
-}
 
 

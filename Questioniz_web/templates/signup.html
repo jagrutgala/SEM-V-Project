@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home Page{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="form-container">
+        <form class="singup-form form" method="POST" action="/home/">
+            {% csrf_token %}
+                <input class="form-input text" type="text" name="username" id="username" placeholder="Username">
+                <input class="form-input password" type="password" name="password" id="password" placeholder="Confirm">
+                <input class="form-input password" type="password" name="cpassword" id="cpassword" placeholder="Confirm Confirm">
+            <button class="signup-btn btn round-border" type="submit" name="signup-btn" value="sign-up">Signup</button>
+            <button class="reset-btn btn round-border" type="reset" name="reset-btn" value="reset">Reset</button>
+        </form>
+    </section>
+{% endblock %}

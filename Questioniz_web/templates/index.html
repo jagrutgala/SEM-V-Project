@@ -3,9 +3,7 @@
 
 {% block title %}Home Page{% endblock %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
 {% endblock %}
 
 {% block script %}
@@ -13,12 +11,8 @@
     <script src="{% static 'js/home.js' %}" defer></script>
 {% endblock %}
 
-{% block header %}
-
-{% endblock %}
-
 {% block content %}
-    <section class="form-container">
+    <!-- <section class="form-container">
         <form class="edit-text-form" name="edit-text-form" id="edit-text-form" method="POST" action="questions/">
             {% csrf_token %}
             <label class="edit-text-label" for="text">Text Here <span>🠗</span></label>
@@ -28,13 +22,20 @@
             </div>
                 <button type="submit" class="send_text btn round-border-thick" id="send_text-btn" name="send_text-btn" value="gen_questions">Generate</button>
         </form>
-    </section>
+    </section> -->
 
-    <section class=""></section>
+    <section class="">
+        Index Page
+        about and how it works
+        product description
+    </section>
 {% endblock %}
 
 {% block footer %}
     <div class="no-display overlay" id="loading">
         <div class="loader"></div>
     </div>
+    {% if c %}
+        {{c}}
+    {% endif %}
 {% endblock %}
