@@ -1,0 +1,38 @@
+/* list */
+.history--ul {
+    list-style-type: none;
+}
+
+.question--item {
+    margin-bottom: 2rem;
+}
+
+.question--text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 0.7rem;
+}
+
+.question--text::before {
+    content: '?';
+    position: absolute;
+    width: max-content;
+    top: 50%;
+    right: 102%;
+    font-weight: bold;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+
+
+/* Submit Btn */
+.submit-btn {
+    color: var(--text-color-acent);
+    background: var(--bacground-color-acent);
+    font-size: 1rem;
+    font-weight: 200;
+    margin: 0;
+    opacity: 0.6;
+}

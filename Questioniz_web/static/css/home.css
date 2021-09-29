@@ -12,6 +12,11 @@
     padding: 3rem;
 }
 
+.pg-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .form {
     display: flex;
     flex-direction: column;

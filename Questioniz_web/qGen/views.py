@@ -50,8 +50,8 @@ def home(request):
             if(not username or not password): return redirect("/error/invalid_username_or_password")
             if(password!= cpassword): return redirect("/error/passwords_dont_match")
             if(EndUser.objects.filter(username= username)): return redirect("/error/user_already_exists")
-            c= EndUser(username=username, password=password)
-            c.save()
+            user= EndUser(username=username, password=password)
+            user.save()
             request.session["username"]= user.username
         elif(request.POST.get("login-btn", False)== "let-me-in"): #code to authenticate login
             username= cleanText(request.POST.get("username"), "username")
@@ -59,10 +59,10 @@ def home(request):
             user= validate(username, password)
             if not user: return redirect("/error/invalid_username_or_password")
             request.session["username"]= user.username
-            try:
-                options["username"]= request.session["username"]
-            except Exception:
-                pass
+        try:
+            options["username"]= request.session["username"]
+        except Exception:
+            pass
     return render(request, "index.html", options)
 
 def signup(request):
@@ -101,13 +101,14 @@ def logout(request):
 def error(request, err):
     options= {
         "username": None,
+        "error_msg": err,
     }
     try:
         options["username"]= request.session["username"]
     except Exception:
         pass
     print(err)
-    return render(request, "error.html", {"error_msg": err})
+    return render(request, "error.html", options)
 
     # b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
     # b.save()
@@ -172,5 +173,10 @@ def history(request):
     if(options["username"]): # get paragraph if logged in
         user= EndUser.objects.get(username= options["username"])
         ph_query= ParaHistory.objects.filter(username= user).order_by("-para_no")
-        options["paragraphs"]= [p.paragraph.paragraph for p in ph_query[:10]]
+        ph_set= []
+        for p in ph_query:
+            if(p.paragraph.paragraph in ph_set): continue
+            ph_set.append(p.paragraph.paragraph)
+        
+        options["paragraphs"]= ph_set[:10]
     return render(request, "history.html", options)

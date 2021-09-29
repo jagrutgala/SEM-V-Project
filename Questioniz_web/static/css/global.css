@@ -43,6 +43,10 @@ body {
     scroll-behavior: smooth;
 }
 
+.content {
+    padding: 2rem;
+}
+
 /* Btn */
 .btn {
     background: none;
@@ -50,6 +54,12 @@ body {
     padding: 0.5rem 1rem;
     border: none;
     outline: none;
+    transition: 200ms;
+}
+
+.btn:hover, btn:focus {
+    transform: translateY(-5px);
+    opacity: 1;
 }
 
 .btn+ * {
@@ -123,3 +133,13 @@ body {
     border: none;
     outline: none;
 }
+
+/* .custom-marker ::marker {
+    content: '?';
+    font-weight: 800;
+    vertical-align: middle;
+}
+
+.custom-marker> li {
+    padding-left: 1rem;
+} */

@@ -8,6 +8,7 @@
 
 {% block content %}
     <section class="form-container">
+        <h1 class="pg-title">Sign up</h1>
         <form class="singup-form form" method="POST" action="/home/">
             {% csrf_token %}
                 <input class="form-input text" type="text" name="username" id="username" placeholder="Username">

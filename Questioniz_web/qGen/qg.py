@@ -130,7 +130,7 @@ class QuestionGenerator:
                     q_can[(s_id, aw)]= " ". join(sent_copy)
         return q_can
 
-    def MakeQuestions(self):
+    def MakeQuestions(self)->dict:
         stop_sentences= self.document.getstopSentences()
         cleaned_sentences= self.document.getCleanedSentences()
         tf_idf_score= self.tf_idf(stop_sentences)

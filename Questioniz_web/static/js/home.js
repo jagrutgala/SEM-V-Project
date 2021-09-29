@@ -1,4 +1,4 @@
-var edit_area= document.querySelector("#edit-area");
+var edit_area= document.querySelector("#text-area");
 edit_area.addEventListener("input", function (event) {
     let words= edit_area.value.replace(/\n/g, " ").split(" ").filter((entry)=> {
         return entry.trim()!= '';

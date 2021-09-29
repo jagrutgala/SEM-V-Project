@@ -13,13 +13,9 @@
 {% block header %}
     <p class="error big">Error</p>
 {% endblock %}
+
 {% block content %}
-    <div class="link-back">
-        <a class="go-back btn round-border-thin" href="/">🠔 Go Back</a>
-    </div>
-    <div>
-        "{{error_msg}}"
-    </div>
-    
+    <div>"{{error_msg}}"</div>
 {% endblock %}
+
 {% block footer %}{% endblock %}

@@ -102,19 +102,17 @@
 
 /* Go Back Btn */
 .go-back, .go-back:visited {
+    align-self: flex-start;
     color: var(--text-color);
     font-size: 1rem;
-    text-decoration: none;
     opacity: 0.5;
     margin-left: 0;
-    transform: scale(1);
-    transition: opacity ease 250ms;
+    /* transform: scale(1); */
 }
 
 .go-back:hover, .go-back:focus {
-    text-decoration: underline;
     opacity: 0.7;
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 
 /* Clear Btn */
@@ -184,6 +182,7 @@
 
 .question--item {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid currentColor;
@@ -200,8 +199,9 @@
     transform: translateY(-50%) rotate(-90deg);
 }
 
-.question-container {
-    max-width: 60%;
+.action-container {
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .selected {

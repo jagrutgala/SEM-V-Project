@@ -31,14 +31,14 @@
 
     <section class="questions--section">
         <button class="clear-selection-btn btn round-border-thin no-display" id="clear-selection-btn" name="clear-selection-btn" onclick="clearSelection()">X</button>
-        <ul class="questions--ul" name="questions--ul" id="questions--ul">
+        <ul class="questions--ul custom-marker" name="questions--ul" id="questions--ul">
             {% for i, s in questions_with_ans %}
                 <li class="question--item">
                     <div class="question-contanier">
                         <span class="question" onclick="toggleAnswer('{{forloop.counter0}}')">{{s}}?</span>
                         <p class="answer no-display">Answer: {{i.1}}</p>
                     </div>
-                    <div>
+                    <div class="action-container">
                         <button class="highlight btn round-border-thin" hover="Highlight" onclick="highlightPrase('{{i.0}}')">
                             <svg class="svg-highlight svg" viewBox="0 0 16 16"><use xlink:href="#svg-highlight" href="#svg-highlight"></use></svg>
                         </button>
