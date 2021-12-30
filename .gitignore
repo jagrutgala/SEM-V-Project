@@ -1,6 +1,7 @@
-questioniz/
+questioniz
+**/env/
 **/__pycache__/**
-*.pdf
-t_index.html
+**/blackBook/screen\ layout
+**/blackBook/**/*.png
 Project Related.docx
-Refferences/dhanashree.docx
+**/Refferences/
